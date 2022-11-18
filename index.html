@@ -1,50 +1,100 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
+
 <head>
-    <meta charset="UTF-8" />
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <script defer src="https://unpkg.com/alpinejs@3.5.0/dist/cdn.min.js"></script>
+    <title>API</title>
 </head>
+
 <body>
-    <h1>Hallo</h1>
+
+    <div class="container-lg container-md container-sm text-center ">
+
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <a class="navbar-brand" href="#">API Project</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://web-mykyta-garbuzov.cloud.okteto.net">Okteta Cloud</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://web-mykyta-garbuzov.cloud.okteto.net/api/ui/">OpenAPI</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://web-mykyta-garbuzov.cloud.okteto.net/api/database">See
+                            Database</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
 
 
-    <!-- <div x-data="{
-        database:[]}"  
-        async getData() {
-        x-init="database = await (await fetch('http://127.0.0.1:8000/api/database'))">
-        <button x-on:click="getData">Send get request</button>
 
-       
-    </div> -->
-
-    <div x-data="{
+        <div class="pt-4 px-2 py-2">
+            <h1 class="">Welcome to API website</h1>
+            <div class="row p-4 d-flex justify-content-between">
+                <div class="col-lg-6 col-md-6 col-sm-4 ">
+                    <div x-data="{
         database: null,
         async getData() {
-            this.database = await (await fetch('http://127.0.0.1:8000/api/database')).json();
+            this.database = await (await fetch('https://web-mykyta-garbuzov.cloud.okteto.net/api/database')).json();
         }
-    }"
-    >
+    }">
+                        <button type="button" class="btn btn-secondary btn-sm" x-on:click="getData = ! getData">Display
+                            Current Database</button>
+                        <div class="pt-4" x-show="getData" x-transition>
+                            <table class="table">
+                                <tr>
+                                    <th scope="col">ID</th>
+                                    <td x-text="database[0].id"></td>
+                                    <td x-text="database[1].id"></td>
+                                    <td x-text="database[2].id"></td>
+                                    <td x-text="database[3].id"></td>
+                                </tr>
+                                <tr>
+                                    <th scope="col">Name</th>
+                                    <td x-text="database[0].name"></td>
+                                    <td x-text="database[1].name"></td>
+                                    <td x-text="database[2].name"></td>
+                                    <td x-text="database[3].name"></td>
+                                </tr>
+                                <tr>
+                                    <th scope="col">Surname</th>
+                                    <td x-text="database[0].surname"></td>
+                                    <td x-text="database[1].surname"></td>
+                                    <td x-text="database[2].surname"></td>
+                                    <td x-text="database[3].surname"></td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
 
-    
-        <button x-on:click="getData">Display Current Database</button>
-        <p x-text="database[0].name"></p> <p x-text="database[0].surname"></p>
-        <p x-text="database[1].name"></p> <p x-text="database[1].surname"></p>
-        <p x-text="database[2].name"></p> <p x-text="database[2].surname"></p>
-        <p x-text="database[3].name"></p> <p x-text="database[3].surname"></p>
-       
-        
-    </div>
-
-
-    <!-- <div x-data="{
+                <div class="col-lg-4 col-md-6 col-sm-4 ">
+                    <div x-data="{
         responsedata: null,
-        posttitle: null,
+        name: null,
+        surname: null,
         async callmethod1() {
-            this.responsedata = await (await fetch('http://127.0.0.1:8000/api/database', 
+            this.responsedata = await (await fetch('https://web-mykyta-garbuzov.cloud.okteto.net/api/database', 
             {
                 method: 'POST',
                 body: JSON.stringify({
-                    name: this.posttitle,
-                    surname: 'Garbuzov',
+                    name: this.name,
+                    surname: this.surname,
                     
                 }),
                 headers: {
@@ -55,12 +105,47 @@
             console.log(this.responsedata);
         },
     }">
-        <input type="text" x-model="posttitle">
-        <button x-on:click="callmethod1">Call method</button>
+                        <form>
+                            <div class="row">
+                                <div class="col">
+                                    <input type="text" x-model="name" class="form-control" placeholder="First name">
+                                </div>
+                                <div class="col">
+                                    <input type="text" x-model="surname" class="form-control" placeholder="Last name">
+                                </div>
+                            </div>
+                            <div class="row pt-2">
+                                <div class="col">
+                                    <button type="button" class="btn btn-secondary btn-sm"
+                                        x-on:click="callmethod1">Submit</button>
+                                    <ul class="list-group text-left pt-2">
+                                        <li class="list-group-item">
+                                            <p>New person id: <strong x-text="responsedata.id" x-transition></strong></p>
+                                        </li>
+                                        <li class="list-group-item">
+                                            <p>First Name: <strong x-text="responsedata.name" x-transition></strong></p>
+                                        </li>
+                                        <li class="list-group-item">
+                                            <p>Last Name: <strong x-text="responsedata.surname" x-transition></strong></p>
+                                        </li>
+                                    </ul>
+                                </div>
+                        </form>
 
-        <p>Data inserted with id: <strong x-text="responsedata.id"></strong></p>
-        <p>Title that was inserted: <strong x-text="responsedata.surname"></strong></p>
+                    </div>
 
-    </div> -->
+
+                </div>
+            </div>
+        </div>
+    </div>
 </body>
+<footer class=" text-center text-lg-start">
+
+    <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
+        <a class="text-dark" href="https://github.com/Mykyta-Garbuzov/basisproject">Made by Mykyta Garbuzov</a>
+    </div>
+
+</footer>
+
 </html>
