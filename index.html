@@ -40,9 +40,6 @@
                 </ul>
             </div>
         </nav>
-
-
-
         <div class="pt-4 px-2 py-2">
             <h1 class="">Welcome to API website</h1>
             <div class="row p-4 d-flex justify-content-between">
@@ -83,6 +80,7 @@
                     </div>
                 </div>
 
+
                 <div class="col-lg-4 col-md-6 col-sm-4 ">
                     <div x-data="{
         responsedata: null,
@@ -120,13 +118,20 @@
                                         x-on:click="callmethod1">Submit</button>
                                     <ul class="list-group text-left pt-2">
                                         <li class="list-group-item">
-                                            <p>New person id: <strong x-text="responsedata.id" x-transition></strong></p>
+                                            <p>New person id: <strong x-text="responsedata.id" x-transition></strong>
+                                            </p>
                                         </li>
                                         <li class="list-group-item">
                                             <p>First Name: <strong x-text="responsedata.name" x-transition></strong></p>
                                         </li>
                                         <li class="list-group-item">
-                                            <p>Last Name: <strong x-text="responsedata.surname" x-transition></strong></p>
+                                            <p>Last Name: <strong x-text="responsedata.surname" x-transition></strong>
+                                            </p>
+                                        </li>
+                                        <li class="list-group-item">
+                                            <p>Time of Creation: <strong
+                                                    x-text="responsedata.timestamp"
+                                                    x-transition></strong></p>
                                         </li>
                                     </ul>
                                 </div>
@@ -138,7 +143,12 @@
                 </div>
             </div>
         </div>
-    </div>
+        
+</body>
+</div>
+
+
+
 </body>
 <footer class=" text-center text-lg-start">
 
